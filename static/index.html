@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'/>
+    <title>Some Web Page</title>
+    <link rel='stylesheet' href='css/styles.css'/>
+  </head>
+  <body>
+	<div class='page'>
+		<div class='header'>
+		  <div class='avatar'>
+		    <img src="img/avatar.png" />
+		  </div>
+		  <div class='about'>
+		    <h1>👋 Sobre</h1>
+		    <p>Olá! Me chamo Cris.<br />
+		    Sou um desenvolvedor apaixonado por linux, low tech, diy, livros, filmes e metal.<br />
+		    Você pode me encontrar no <a href="https://github.com/crdpa">Github</a>, 
+			<a href="https://www.linkedin.com/in/cristhyano/">LinkedIn</a>, 
+			<a href="https://www.goodreads.com/user/show/55958511-crdpa">Goodreads</a>, 
+			<a href="https://letterboxd.com/crdpa/">Letterboxd</a> e crdpa @ tuta . io.
+		  </div>
+		</div>
+		<div class='blog-grid-container'>
+		  <h1>📜 Blog</h1>
+		  <div class='blog-grid'>
+		 	{{range .}}
+		 	  {{if ne .Title ""}}
+			    <div class='blog-grid-item'>
+			      <div class='blog-post-title'>
+			        <h1>{{.Title}}</h1><p id='date'>{{.Date.Format "02/01/2006"}}</p>
+		          </div>
+			      {{.Description}}
+			    </div>
+			  {{end}}
+			{{end}}
+		  </div>
+		</div>
+		<div class='show-posts'><p><a href="">Todos os posts »</a></p>
+		<div class='footer'>
+		  <p><a href="https://crdpa.net/pubkey.asc">AC4F</a> A1ED 66A7 293C 0DFA DD11 5178 6924 9446 17E3</p>
+		</div>
+	</div>
+  </body>
+</html>

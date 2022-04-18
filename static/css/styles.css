@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 2.5%;
+  background: #131313;
+  color: #bbbbbb;
+  line-height: 1.4;
+  font-size: 12pt;
+}
+
+h1 {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  margin-left: 8px;
+  color: #bb6767;
+  font-size: 18pt;
+}
+
+a,
+a:visited,
+a:hover { color: #deb14f }
+
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+code {
+  font-family: 'IBM Plex Mono', Monaco, monospace;
+  font-size: 85%;
+  padding: 0px; 
+  border-radius: 2px; 
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+}
+
+.avatar img {
+  display: block;
+  margin: 10px;
+  width: auto;
+  height: 150px;
+}
+
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  .header {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    height: auto;
+    width: 100%;
+  }
+
+  .avatar img {
+    display: block;
+    margin: auto;
+    width: auto;
+    height: 150px;
+  }
+}
+
+.about p {
+  padding: 6px;
+}
+
+.links {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.blog-grid-container {
+  justify-content: center;
+}
+
+.blog-grid {
+  flex-direction: column;
+}
+
+.blog-grid-item {
+  margin: 10px 2px 10px 2px;
+  background: #171717;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.blog-grid-item h1 {
+  margin-top: 1px;
+  margin-bottom: 2px;
+  margin-left: 0px;
+  font-size: 14pt;
+  color: #71bb94;
+}
+
+.blog-post-title {
+  display: flex;
+  align-items: center;
+
+  /* Remove the next line if you want the span to appear next to the h1 */
+  justify-content: space-between;
+  padding: 0px 3px 0px 0px;
+}
+
+#date {
+  font-style: italic;
+  color: #80806c;
+}
+
+.show-posts {
+  text-align: right;
+  font-size: 12pt;
+  padding: 0 10px 0 10px;
+}
+
+.footer {
+  margin-top: 10px;
+  text-align: center;
+}
