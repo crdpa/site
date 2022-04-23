@@ -4,6 +4,7 @@ import (
 	"reflect"
 	"testing"
 	"testing/fstest"
+	"time"
 
 	blogposts "github.com/crdpa/site/blogposts"
 )
@@ -25,7 +26,7 @@ Tags: tdd, go
 *Hello World*`
 		secondBody = `Title: Post 2
 Description: Description 2
-Date: 2022-03-10
+Date: 2006-01-02
 Tags: javascript, glue
 ---
 Test Blog`
@@ -48,7 +49,7 @@ Test Blog`
 	assertPost(t, posts[0], blogposts.Post{
 		Title:       "Post 1",
 		Description: "Description 1",
-		Date:        "2006-01-02",
+		Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
 		Tags:        []string{"tdd", "go"},
 		Body:        `<p><em>Hello World</em></p>`,
 	})

@@ -11,8 +11,8 @@ body {
   margin: 0 auto;
   max-width: 800px;
   padding: 2.5%;
-  background: #131313;
-  color: #bbbbbb;
+  background: #242423;
+  color: #E8EDDF;
   line-height: 1.4;
   font-size: 12pt;
 }
@@ -21,13 +21,13 @@ h1 {
   margin-top: 8px;
   margin-bottom: 4px;
   margin-left: 8px;
-  color: #bb6767;
+  color: #1B998B;
   font-size: 18pt;
 }
 
 a,
 a:visited,
-a:hover { color: #deb14f }
+a:hover { color: #9F84BD }
 
 a { text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -96,7 +96,7 @@ code {
 
 .blog-grid-item {
   margin: 10px 2px 10px 2px;
-  background: #171717;
+  background: #333533;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   border-radius: 5px;
   padding: 10px;
@@ -107,7 +107,7 @@ code {
   margin-bottom: 2px;
   margin-left: 0px;
   font-size: 14pt;
-  color: #71bb94;
+  color: #9395D3;
 }
 
 .blog-post-title {
@@ -121,7 +121,7 @@ code {
 
 #date {
   font-style: italic;
-  color: #80806c;
+  color: #648381;
 }
 
 .show-posts {
@@ -133,4 +133,38 @@ code {
 .footer {
   margin-top: 10px;
   text-align: center;
+}
+
+.archive {
+  justify-content: left;
+}
+
+.archive-item {
+  margin-top: 1px;
+  margin-bottom: 2px;
+  margin-left: 0px;
+  font-size: 14pt;
+}
+
+.archive-item p {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#archivedate {
+  font-style: oblique;
+  font-size: 14pt;
+  color: #648381;
+}
+
+#archivetitle {
+  font-weight: bold;
+  font-size: 14pt;
+  color: #9395D3;
+}
+
+#archivetags {
+  font-style: italic;
+  font-size: 12pt;
+  color: #9F84BD;
 }

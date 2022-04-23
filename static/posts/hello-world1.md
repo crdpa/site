@@ -1,6 +1,6 @@
-Title: Hello, blog!
-Description: First post!
+Title: Ola, site.
+Description: Primeiro post!
 Date: 2006-01-02
-tags: go, tdd
+Tags: go, tdd, teste
 ---
-Post content.
+A nível organizacional, o acompanhamento das preferências de consumo desafia a capacidade de equalização da gestão inovadora da qual fazemos parte.

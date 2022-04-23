@@ -12,6 +12,7 @@ import (
 var (
 	templates = template.Must(template.ParseGlob("./static/*.html"))
 	posts     []blogposts.Post
+	tag       string
 )
 
 func httpFunc(w http.ResponseWriter, r *http.Request) {
@@ -19,9 +20,10 @@ func httpFunc(w http.ResponseWriter, r *http.Request) {
 	case "/", "/index.html":
 		executeTemplate(w, "index.html", blogposts.FrontPage(posts))
 		return
+	case "/blog":
+		tag = r.URL.Query().Get("tag")
+		executeTemplate(w, "blog.html", blogposts.Archive(posts, tag))
 	}
-
-	http.NotFound(w, r)
 }
 
 func executeTemplate(w http.ResponseWriter, templ string, content interface{}) {
@@ -32,18 +34,23 @@ func executeTemplate(w http.ResponseWriter, templ string, content interface{}) {
 }
 
 func main() {
-	fsys := os.DirFS("./static/posts/")
-	var err error
-	posts, err = blogposts.NewPostsFromFS(fsys)
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	stylesheets := http.FileServer(http.Dir("./static/css/"))
 	http.Handle("/css/", http.StripPrefix("/css/", stylesheets))
 	images := http.FileServer(http.Dir("./static/img/"))
 	http.Handle("/img/", http.StripPrefix("/img/", images))
 
 	http.HandleFunc("/", httpFunc)
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	http.HandleFunc("/blog", httpFunc)
+
+	fsys := os.DirFS("./static/posts/")
+	var err error
+	posts, err = blogposts.NewPostsFromFS(fsys, tag)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	port := ":8000"
+	log.Println("Server is running on port" + port)
+
+	log.Fatal(http.ListenAndServe(port, nil))
 }

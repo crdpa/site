@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-func NewPostsFromFS(filesystem fs.FS) ([]Post, error) {
+func NewPostsFromFS(filesystem fs.FS, tag string) ([]Post, error) {
 	dir, err := fs.ReadDir(filesystem, ".")
 	if err != nil {
 		return nil, err
@@ -17,6 +17,7 @@ func NewPostsFromFS(filesystem fs.FS) ([]Post, error) {
 		if err != nil {
 			return nil, err
 		}
+
 		posts = append(posts, post)
 	}
 
@@ -39,7 +40,7 @@ func getPost(filesystem fs.FS, fileName string) (Post, error) {
 }
 
 func FrontPage(posts []Post) []Post {
-	numPosts := 4
+	numPosts := 5
 	if len(posts) < 5 {
 		numPosts = len(posts)
 	}
@@ -48,4 +49,20 @@ func FrontPage(posts []Post) []Post {
 	copy(fpPostList, posts[:numPosts])
 
 	return fpPostList
+}
+
+func Archive(posts []Post, tag string) []Post {
+	if tag == "" {
+		return posts
+	}
+
+	var filterPosts []Post
+	for _, v1 := range posts {
+		for _, v2 := range v1.Tags {
+			if v2 == tag {
+				filterPosts = append(filterPosts, v1)
+			}
+		}
+	}
+	return filterPosts
 }
