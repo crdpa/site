@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang='pt-BR'>
   <head>
-    <title>{{.Title}}</title>
+    <meta charset='UTF-8'/>
+    <title>crdpa.net - {{.Title}}</title>
+    <link rel='stylesheet' href='../css/styles.css'/>
   </head>
   <body>
-    <h1>{{.Title}}</h1>
+    <div class='post'>
     {{.Body}}
-    <a href="/">Back home</a>
+    </div>
+    <div class='post-footer'>
+    <p><a href="/">Home</a> | <a href="/blog">Blog</a></p>
+    </div>
   </body>
 </html>

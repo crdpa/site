@@ -10,25 +10,18 @@ import (
 )
 
 var (
-	posts   []blogposts.Post
-	curPost blogposts.Post
-	tag     string
+	posts []blogposts.Post
+	tag   string
 )
 
 func httpFunc(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/", "/index.html":
-		log.Println("i'm in case /")
 		executeTemplate(w, "index.html", blogposts.FrontPage(posts))
 		return
 	case "/blog":
-		log.Println("i'm in case /blog")
 		tag = r.URL.Query().Get("tag")
 		executeTemplate(w, "blog.html", blogposts.Archive(posts, tag))
-		return
-	case curPost.Url:
-		log.Println("i'm in case curPost")
-		executeTemplate(w, "post.html", curPost)
 		return
 	}
 }
@@ -38,6 +31,12 @@ func executeTemplate(w http.ResponseWriter, templ string, content interface{}) {
 	err := templates.ExecuteTemplate(w, templ, content)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func makePostHandler(post blogposts.Post) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		executeTemplate(w, "post.html", post)
 	}
 }
 
@@ -58,8 +57,7 @@ func main() {
 	http.HandleFunc("/blog", httpFunc)
 
 	for _, post := range posts {
-		curPost = post
-		http.HandleFunc(post.Url, httpFunc)
+		http.HandleFunc(post.Url, makePostHandler(post))
 	}
 
 	port := ":8000"

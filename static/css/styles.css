@@ -25,6 +25,14 @@ h1 {
   font-size: 18pt;
 }
 
+h2 {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  margin-left: 8px;
+  color: #7D5BA6;
+  font-size: 16pt;
+}
+
 a,
 a:visited,
 a:hover { color: #9F84BD }
@@ -32,10 +40,17 @@ a:hover { color: #9F84BD }
 a { text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+pre {
+    background-color: #1F1F1E;
+    color: #B4A6AB;
+    padding: 1em;
+    overflow: auto;
+    border: 0;
+}
+
 code {
   font-family: 'IBM Plex Mono', Monaco, monospace;
-  font-size: 85%;
-  padding: 0px; 
+  font-size: 90%;
   border-radius: 2px; 
 }
 
@@ -167,4 +182,25 @@ code {
   font-style: italic;
   font-size: 12pt;
   color: #9F84BD;
+}
+
+.post h1 {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  margin-left: 0px;
+  color: #1B998B;
+  font-size: 18pt;
+}
+
+.post h2 {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  margin-left: 0px;
+  color: #7D5BA6;
+  font-size: 16pt;
+}
+
+.post p {
+  margin-top: 4px;
+  margin-bottom: 4px;
 }

@@ -52,7 +52,17 @@ Test Blog`
 		Description: "Description 1",
 		Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
 		Tags:        []string{"tdd", "go"},
+		Url:         "/blog/post-1",
 		Body:        `<p><em>Hello World</em></p>`,
+	})
+
+	assertPost(t, posts[1], blogposts.Post{
+		Title:       "Post 2",
+		Description: "Description 2",
+		Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
+		Tags:        []string{"javascript", "glue"},
+		Url:         "/blog/post-2",
+		Body:        `<p>Test Blog</p>`,
 	})
 }
 
@@ -97,4 +107,24 @@ func TestArchive(t *testing.T) {
 			t.Errorf("got %+v, want %+v", got, tests.want)
 		}
 	})
+}
+
+func TestUrlCreator(t *testing.T) {
+	var tests = []struct {
+		title string
+		want  string
+	}{
+		{"Primeiro link 01!", "/blog/primeiro-link-01"},
+		{"Segundo link - 2@", "/blog/segundo-link---2"},
+	}
+
+	for _, tt := range tests {
+		testname := fmt.Sprintf("%s, %s", tt.title, tt.want)
+		t.Run(testname, func(t *testing.T) {
+			ans := blogposts.UrlCreator(tt.title)
+			if ans != tt.want {
+				t.Errorf("got %s, want %s", ans, tt.want)
+			}
+		})
+	}
 }

@@ -1,6 +1,0 @@
-Title: Hello, site.
-Description: First post!
-Date: 2006-01-02
-Tags: go, tdd, test
----
-A nível organizacional, o acompanhamento das preferências de consumo desafia a capacidade de equalização da gestão inovadora da qual fazemos parte.

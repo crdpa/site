@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"html/template"
 	"io"
 	"log"
 	"regexp"
@@ -19,7 +20,7 @@ type Post struct {
 	Date        time.Time
 	Tags        []string
 	Url         string
-	Body        string
+	Body        template.HTML
 }
 
 const (
@@ -41,8 +42,8 @@ func newPost(postFile io.Reader) (Post, error) {
 	desc := readLines(descSeparator)
 	date := readLines(dateSeparator)
 	tags := strings.Split(readLines(tagsSeparator), ", ")
-	url := urlCreator(title)
-	body := strings.TrimSuffix(readBody(scanner), "\n")
+	url := UrlCreator(title)
+	body := template.HTML(readBody(scanner))
 
 	const dateForm = "2006-01-02"
 	parsedDate, err := time.Parse(dateForm, date)
@@ -60,7 +61,7 @@ func newPost(postFile io.Reader) (Post, error) {
 	}, nil
 }
 
-func readBody(scanner *bufio.Scanner) string {
+func readBody(scanner *bufio.Scanner) []byte {
 	scanner.Scan()
 	buf := bytes.Buffer{}
 	for scanner.Scan() {
@@ -69,10 +70,10 @@ func readBody(scanner *bufio.Scanner) string {
 
 	newBuf := buf.String()
 	content := blackfriday.Run([]byte(newBuf))
-	return string(content)
+	return content
 }
 
-func urlCreator(title string) string {
+func UrlCreator(title string) string {
 	title = strings.ToLower(strings.Replace(title, " ", "-", -1))
 	reg, err := regexp.Compile("[^a-z0-9\\-]+")
 	if err != nil {

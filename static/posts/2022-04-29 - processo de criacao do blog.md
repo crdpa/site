@@ -14,11 +14,12 @@ Eu já programei utilizando Go antes, mas nunca trabalhei profissionalmente (at�
 O que eu quero é bem básico. Um site com informações pessoais minhas para servir de portfólio e um local para escrever sobre assuntos variados do meu interesse.
 Meu primeiro passo foi criar um servidor para a página. Algo simples de se implementar em Go.
 
-```
-// Esta é a função de request para ser usado na http.HandleFunc, ela irá direcionar o endereço raiz do site para index.html
-// e executar a função que irá gerar os posts da página inicial (explicado mais a frente)
-// Também direcionará o endereço crdpa.net/blog para o arquivo blog.html e caso haja uma tag no endereço (?tag=), irá extrair
-// e utilizar na função para exibir os posts com aquela tag
+```go
+// Esta é a função de request para ser usado na http.HandleFunc, ela irá direcionar
+// o endereço raiz do site para index.html e executar a função que irá gerar os posts
+// da página inicial. Também direcionará o endereço crdpa.net/blog para o arquivo blog.html
+// e caso haja uma tag no endereço (?tag=), irá extrair e utilizar na função para exibir os
+// posts com aquela tag
 func httpFunc(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 		case "/", "/index.html":
@@ -61,7 +62,7 @@ Rodando o aplicativo, é só digitar *localhost:8000* no navegador e a página i
 
 Meu próximo passo seria mostrar uma lista de links para os posts do blog. A estrutura dos posts ficou assim:
 
-```
+```go
 type Post struct {
     Title       string
     Description string
@@ -88,7 +89,7 @@ O programa deve ler a primeira linha e atribuir ao título, a segunda à data e 
 
 A função para ler os arquivos e criar a estrutura Post ficou assim:
 
-```
+```go
 // Separadores para definir o que cada linha representa
 const (
 	titleSeparator = "Title: "
@@ -148,7 +149,7 @@ func readBody(scanner *bufio.Scanner) string {
 
 Há várias maneiras de se ler os arquivos de uma pasta em Go. Não irei entrar nestes detalhes aqui. Criei uma função chamada NewPostsFromFS que lê a pasta onde estão os arquivos markdown e retorna um slice do struct Post ordenado por data utilizando uma função anônima que ficou assim:
 
-```
+```go
 sort.Slice(posts, func(i, j int) bool {
 	return posts[i].Date.After(posts[j].Date)
 })
