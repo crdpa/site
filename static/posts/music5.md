@@ -1,4 +1,4 @@
-Title: Top 10 Bandas Metal
+Title: Top 10 Bandas Gospel
 Description: Crítica musical Gabrielly faz uma lista das melhores bandas emo do mundo!
 Date: 2022-04-14
 Tags: music, emo

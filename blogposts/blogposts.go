@@ -57,10 +57,11 @@ func Archive(posts []Post, tag string) []Post {
 	}
 
 	var filterPosts []Post
-	for _, v1 := range posts {
-		for _, v2 := range v1.Tags {
-			if v2 == tag {
-				filterPosts = append(filterPosts, v1)
+	for _, post := range posts {
+		for _, postTag := range post.Tags {
+			if postTag == tag {
+				filterPosts = append(filterPosts, post)
+				break
 			}
 		}
 	}

@@ -28,7 +28,7 @@
 		 	  {{if ne .Title ""}}
 			    <div class='blog-grid-item'>
 			      <div class='blog-post-title'>
-			        <h1>{{.Title}}</h1><p id='date'>{{.Date.Format "02/01/2006"}}</p>
+			        <h1><a href='{{.Url}}'>{{.Title}}</a></h1><p id='date'>{{.Date.Format "02/01/2006"}}</p>
 		          </div>
 			      {{.Description}}
 			    </div>

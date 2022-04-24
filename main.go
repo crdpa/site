@@ -10,23 +10,31 @@ import (
 )
 
 var (
-	templates = template.Must(template.ParseGlob("./static/*.html"))
-	posts     []blogposts.Post
-	tag       string
+	posts   []blogposts.Post
+	curPost blogposts.Post
+	tag     string
 )
 
 func httpFunc(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/", "/index.html":
+		log.Println("i'm in case /")
 		executeTemplate(w, "index.html", blogposts.FrontPage(posts))
 		return
 	case "/blog":
+		log.Println("i'm in case /blog")
 		tag = r.URL.Query().Get("tag")
 		executeTemplate(w, "blog.html", blogposts.Archive(posts, tag))
+		return
+	case curPost.Url:
+		log.Println("i'm in case curPost")
+		executeTemplate(w, "post.html", curPost)
+		return
 	}
 }
 
 func executeTemplate(w http.ResponseWriter, templ string, content interface{}) {
+	templates := template.Must(template.ParseGlob("./static/*.html"))
 	err := templates.ExecuteTemplate(w, templ, content)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -34,6 +42,13 @@ func executeTemplate(w http.ResponseWriter, templ string, content interface{}) {
 }
 
 func main() {
+	fsys := os.DirFS("./static/posts/")
+	var err error
+	posts, err = blogposts.NewPostsFromFS(fsys, tag)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	stylesheets := http.FileServer(http.Dir("./static/css/"))
 	http.Handle("/css/", http.StripPrefix("/css/", stylesheets))
 	images := http.FileServer(http.Dir("./static/img/"))
@@ -42,11 +57,9 @@ func main() {
 	http.HandleFunc("/", httpFunc)
 	http.HandleFunc("/blog", httpFunc)
 
-	fsys := os.DirFS("./static/posts/")
-	var err error
-	posts, err = blogposts.NewPostsFromFS(fsys, tag)
-	if err != nil {
-		log.Fatal(err)
+	for _, post := range posts {
+		curPost = post
+		http.HandleFunc(post.Url, httpFunc)
 	}
 
 	port := ":8000"

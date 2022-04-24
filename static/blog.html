@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+  <head>
+    <meta charset='UTF-8'/>
+    <title>crdpa.net - blog</title>
+    <link rel='stylesheet' href='css/styles.css'/>
+  </head>
+  <body>
+    <h1>📜 Blog</h1>
+    <div class='archive'>
+    {{range .}}
+      {{if ne .Title ""}}
+        <div class='archive-item'>
+          <a href='{{.Url}}'>
+          <p id='archivedate'>{{.Date.Format "02/01/2006"}} - </p>
+          <p id='archivetitle'>{{.Title}}</p>
+          </a>
+          <p id='archivetags'>{{range .Tags}} <a href='/blog?tag={{.}}'>{{.}}</a>{{end}}</p>
+        </div>
+      {{end}}
+    {{end}}
+    </div>
+    <a href="/">« Back</a>
+  </body>
+</html>
