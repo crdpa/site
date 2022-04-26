@@ -1,6 +1,6 @@
 FROM golang:1.18.1-alpine AS builder
 WORKDIR /build
-ADD go.mod go.sum main.go blogposts/ /build/
+COPY go.mod go.sum main.go blogposts/ /build/
 RUN go build
 
 FROM alpine
