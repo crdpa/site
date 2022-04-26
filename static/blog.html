@@ -6,20 +6,19 @@
     <link rel='stylesheet' href='css/styles.css'/>
   </head>
   <body>
-    <h1>📜 Blog</h1>
-    <div class='archive'>
+    <h1>Blog</h1>
+    <div class='archive' id='top'>
     {{range .}}
       {{if ne .Title ""}}
         <div class='archive-item'>
-          <a href='{{.Url}}'>
           <p id='archivedate'>{{.Date.Format "02/01/2006"}} - </p>
-          <p id='archivetitle'>{{.Title}}</p>
+          <a href='{{.Url}}'><p id='archivetitle'>{{.Title}}</p></a>
           </a>
-          <p id='archivetags'>{{range .Tags}} <a href='/blog?tag={{.}}'>{{.}}</a>{{end}}</p>
+          <p id='archivetags'> {{range $key, $value := .Tags}} <a href='/blog?tag={{$key}}'>{{$key}}</a>{{end}}</p>
         </div>
       {{end}}
     {{end}}
     </div>
-    <a href="/">« Back</a>
+    <p><a href='/'>« Back</a> | <a href='#top'>Top</a></p>
   </body>
 </html>

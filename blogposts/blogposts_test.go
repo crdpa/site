@@ -10,6 +10,31 @@ import (
 	blogposts "github.com/crdpa/site/blogposts"
 )
 
+var (
+	testPost1 = blogposts.Post{
+		Title:       "Post 1",
+		Description: "Description 1",
+		Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
+		Tags: map[string]struct{}{
+			"tdd": {},
+			"go":  {},
+		},
+		Url:  "/blog/post-1",
+		Body: `<p>Test 1</p>`,
+	}
+	testPost2 = blogposts.Post{
+		Title:       "Post 2",
+		Description: "Description 2",
+		Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
+		Tags: map[string]struct{}{
+			"javascript": {},
+			"glue":       {},
+		},
+		Url:  "/blog/post-2",
+		Body: `<p>Test 2</p>`,
+	}
+)
+
 func assertPost(t *testing.T, got blogposts.Post, want blogposts.Post) {
 	t.Helper()
 	if !reflect.DeepEqual(got, want) {
@@ -24,13 +49,13 @@ Description: Description 1
 Date: 2006-01-02
 Tags: tdd, go
 ---
-*Hello World*`
+Test 1`
 		secondBody = `Title: Post 2
 Description: Description 2
 Date: 2006-01-02
 Tags: javascript, glue
 ---
-Test Blog`
+Test 2`
 	)
 
 	fs := fstest.MapFS{
@@ -38,7 +63,7 @@ Test Blog`
 		"hello-world2.md": {Data: []byte(secondBody)},
 	}
 
-	posts, err := blogposts.NewPostsFromFS(fs, "")
+	posts, err := blogposts.NewPostsFromFS(fs)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -47,23 +72,9 @@ Test Blog`
 		t.Errorf("got %d posts, want %d posts", len(posts), len(fs))
 	}
 
-	assertPost(t, posts[0], blogposts.Post{
-		Title:       "Post 1",
-		Description: "Description 1",
-		Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
-		Tags:        []string{"tdd", "go"},
-		Url:         "/blog/post-1",
-		Body:        `<p><em>Hello World</em></p>`,
-	})
+	assertPost(t, posts[0], testPost1)
 
-	assertPost(t, posts[1], blogposts.Post{
-		Title:       "Post 2",
-		Description: "Description 2",
-		Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
-		Tags:        []string{"javascript", "glue"},
-		Url:         "/blog/post-2",
-		Body:        `<p>Test Blog</p>`,
-	})
+	assertPost(t, posts[1], testPost2)
 }
 
 func TestArchive(t *testing.T) {
@@ -72,32 +83,9 @@ func TestArchive(t *testing.T) {
 		tag  string
 		want []blogposts.Post
 	}{
-		post: []blogposts.Post{
-			{
-				Title:       "Post 1",
-				Description: "Description 1",
-				Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
-				Tags:        []string{"tdd", "go"},
-				Body:        `<p><em>Hello World</em></p>`,
-			},
-			{
-				Title:       "Post 2",
-				Description: "Description 2",
-				Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
-				Tags:        []string{"music"},
-				Body:        `<p>Music</p>`,
-			},
-		},
-		tag: "tdd",
-		want: []blogposts.Post{
-			{
-				Title:       "Post 1",
-				Description: "Description 1",
-				Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
-				Tags:        []string{"tdd", "go"},
-				Body:        `<p><em>Hello World</em></p>`,
-			},
-		},
+		post: []blogposts.Post{testPost1, testPost2},
+		tag:  "tdd",
+		want: []blogposts.Post{testPost1},
 	}
 
 	testname := fmt.Sprintf("%+v, %s, %+v", tests.post, tests.tag, tests.want)

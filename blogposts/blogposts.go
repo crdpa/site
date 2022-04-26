@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-func NewPostsFromFS(filesystem fs.FS, tag string) ([]Post, error) {
+func NewPostsFromFS(filesystem fs.FS) ([]Post, error) {
 	dir, err := fs.ReadDir(filesystem, ".")
 	if err != nil {
 		return nil, err
@@ -58,12 +58,13 @@ func Archive(posts []Post, tag string) []Post {
 
 	var filterPosts []Post
 	for _, post := range posts {
-		for _, postTag := range post.Tags {
-			if postTag == tag {
-				filterPosts = append(filterPosts, post)
-				break
-			}
+		_, has := post.Tags[tag]
+		if !has {
+			continue
 		}
+
+		filterPosts = append(filterPosts, post)
 	}
+
 	return filterPosts
 }

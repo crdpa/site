@@ -155,4 +155,4 @@ sort.Slice(posts, func(i, j int) bool {
 })
 ```
 
-No próximo post irei mostrar como implementei as tags e filtrei a página de posts para exibir somente os posts com a tag que o visitante seleciona e como implementei os links para cada post.
+No próximo post irei mostrar como implementei as tags e filtrei a página de posts para exibir somente os posts com a tag que o visitante seleciona e também como implementei os links para cada post.

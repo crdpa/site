@@ -43,7 +43,7 @@ func makePostHandler(post blogposts.Post) http.HandlerFunc {
 func main() {
 	fsys := os.DirFS("./static/posts/")
 	var err error
-	posts, err = blogposts.NewPostsFromFS(fsys, tag)
+	posts, err = blogposts.NewPostsFromFS(fsys)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -18,7 +18,7 @@ type Post struct {
 	Title       string
 	Description string
 	Date        time.Time
-	Tags        []string
+	Tags        map[string]struct{}
 	Url         string
 	Body        template.HTML
 }
@@ -41,7 +41,7 @@ func newPost(postFile io.Reader) (Post, error) {
 	title := readLines(titleSeparator)
 	desc := readLines(descSeparator)
 	date := readLines(dateSeparator)
-	tags := strings.Split(readLines(tagsSeparator), ", ")
+	tagSlice := strings.Split(readLines(tagsSeparator), ", ")
 	url := UrlCreator(title)
 	body := template.HTML(readBody(scanner))
 
@@ -49,6 +49,11 @@ func newPost(postFile io.Reader) (Post, error) {
 	parsedDate, err := time.Parse(dateForm, date)
 	if err != nil {
 		return Post{}, nil
+	}
+
+	tags := make(map[string]struct{})
+	for _, tag := range tagSlice {
+		tags[fmt.Sprintf(tag)] = struct{}{}
 	}
 
 	return Post{
@@ -68,8 +73,8 @@ func readBody(scanner *bufio.Scanner) []byte {
 		fmt.Fprintln(&buf, scanner.Text())
 	}
 
-	newBuf := buf.String()
-	content := blackfriday.Run([]byte(newBuf))
+	newBuf := buf.Bytes()
+	content := bytes.TrimSpace(blackfriday.Run(newBuf))
 	return content
 }
 

@@ -6,11 +6,14 @@
     <link rel='stylesheet' href='../css/styles.css'/>
   </head>
   <body>
+    <div class='post-links' id='top'>
+    <p><a href="/">Home</a> | <a href="/blog">Blog</a> | <a href='#bottom'>Bottom</a></p>
+    </div>
     <div class='post'>
     {{.Body}}
     </div>
-    <div class='post-footer'>
-    <p><a href="/">Home</a> | <a href="/blog">Blog</a></p>
+    <div class='post-links' id='bottom'>
+    <p><a href="/">Home</a> | <a href="/blog">Blog</a> | <a href='#top'>Top</a></p>
     </div>
   </body>
 </html>
