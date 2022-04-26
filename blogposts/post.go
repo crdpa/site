@@ -86,5 +86,6 @@ func UrlCreator(title string) string {
 	}
 
 	url := reg.ReplaceAllString(title, "")
+	url = strings.Replace(url, "---", "-", -1)
 	return "/blog/" + url
 }

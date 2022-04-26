@@ -1,5 +1,5 @@
-Title: Criando o site do zero - parte 1
-Description: Como criei este site utilizando Go no backend.
+Title: Building this blog from scratch - part 1
+Description: A technical approach on building this blog using Go.
 Date: 2022-04-29
 Tags: go, website
 ---

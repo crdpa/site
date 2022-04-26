@@ -7,18 +7,31 @@
   </head>
   <body>
     <h1>Blog</h1>
-    <div class='archive' id='top'>
-    {{range .}}
-      {{if ne .Title ""}}
-        <div class='archive-item'>
-          <p id='archivedate'>{{.Date.Format "02/01/2006"}} - </p>
-          <a href='{{.Url}}'><p id='archivetitle'>{{.Title}}</p></a>
-          </a>
-          <p id='archivetags'> {{range $key, $value := .Tags}} <a href='/blog?tag={{$key}}'>{{$key}}</a>{{end}}</p>
-        </div>
+    <div class='content' id='top'>
+      <div class='tags'>
+        {{range .}}
+        <p>Tags:
+        {{range $key, $value := .Tags}}
+          <a href='/blog?tag={{$key}}'>{{$key}}</a>
+        {{end}}
+        </p>
+        {{end}}
+      </div>
+      <div class='archive'>
+      {{range .}}
+        {{if ne .Title ""}}
+          <div class='archive-item'>
+            <p id='archivedate'>{{.Date.Format "Jan 02, 2006"}} - </p>
+            <a href='{{.Url}}'><p id='archivetitle'>{{.Title}}</p></a>
+            </a>
+            <p id='archivetags'> {{range $key, $value := .Tags}} <a href='/blog?tag={{$key}}'>{{$key}}</a>{{end}}</p>
+          </div>
+        {{end}}
       {{end}}
-    {{end}}
+      </div>
     </div>
-    <p><a href='/'>« Back</a> | <a href='#top'>Top</a></p>
+    <div class='bottom-links'>
+      <p><a href='/'>« Back</a> | <a href='#top'>Top</a></p>
+    </div>
   </body>
 </html>

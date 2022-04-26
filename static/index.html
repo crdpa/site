@@ -12,13 +12,13 @@
 		    <img src='img/avatar.png' />
 		  </div>
 		  <div class='about'>
-		    <h1>Sobre</h1>
-		    <p>Olá! Me chamo Cris.<br />
-		    Sou um desenvolvedor apaixonado por linux, low tech, diy, livros, filmes e metal.<br />
-		    Você pode me encontrar no <a href='https://github.com/crdpa'>Github</a>,
+		    <h1>About</h1>
+		    <p>Hi! I'm Cris.<br />
+		    I'm a backend developer who loves linux, low tech, diy, books, movies and metal music.<br />
+		    You can find me on <a href='https://github.com/crdpa'>Github</a>,
 			<a href='https://www.linkedin.com/in/cristhyano/'>LinkedIn</a>, 
 			<a href='https://www.goodreads.com/user/show/55958511-crdpa'>Goodreads</a>, 
-			<a href='https://letterboxd.com/crdpa/'>Letterboxd</a> e crisdpa @ tuta . io.
+			<a href='https://letterboxd.com/crdpa/'>Letterboxd</a> and crisdpa @ tuta . io.
 		  </div>
 		</div>
 		<div class='blog-grid-container'>
@@ -28,7 +28,7 @@
 		 	  {{if ne .Title ""}}
 			    <div class='blog-grid-item'>
 			      <div class='blog-post-title'>
-			        <h1><a href='{{.Url}}'>{{.Title}}</a></h1><p id='date'>{{.Date.Format "02/01/2006"}}</p>
+			        <h1><a href='{{.Url}}'>{{.Title}}</a></h1><p id='date'>{{.Date.Format "Jan 02, 2006"}}</p>
 		          </div>
 			      {{.Description}}
 			    </div>
@@ -36,7 +36,7 @@
 			{{end}}
 		  </div>
 		</div>
-		<div class='show-posts'><p><a href="/blog">Todos os posts »</a></p>
+		<div class='show-posts'><p><a href="/blog">All posts »</a></p>
 		<div class='footer'>
 		  <p><a href='https://crdpa.net/pubkey.asc'>AC4F</a> A1ED 66A7 293C 0DFA DD11 5178 6924 9446 17E3</p>
 		</div>

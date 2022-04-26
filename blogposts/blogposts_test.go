@@ -103,7 +103,7 @@ func TestUrlCreator(t *testing.T) {
 		want  string
 	}{
 		{"Primeiro link 01!", "/blog/primeiro-link-01"},
-		{"Segundo link - 2@", "/blog/segundo-link---2"},
+		{"Segundo link - 2@", "/blog/segundo-link-2"},
 	}
 
 	for _, tt := range tests {
