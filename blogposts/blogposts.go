@@ -5,6 +5,11 @@ import (
 	"sort"
 )
 
+type Archive struct {
+	Posts []Post
+	Tags  []string
+}
+
 func NewPostsFromFS(filesystem fs.FS) ([]Post, error) {
 	dir, err := fs.ReadDir(filesystem, ".")
 	if err != nil {
@@ -51,9 +56,31 @@ func FrontPage(posts []Post) []Post {
 	return fpPostList
 }
 
-func Archive(posts []Post, tag string) []Post {
+func tagList(posts []Post) []string {
+	tagsMap := make(map[string]struct{}, len(posts))
+	for _, post := range posts {
+		for key := range post.Tags {
+			tagsMap[key] = struct{}{}
+		}
+	}
+
+	var tagsSlice []string
+	for key := range tagsMap {
+		tagsSlice = append(tagsSlice, key)
+	}
+
+	sort.Strings(tagsSlice)
+	return tagsSlice
+}
+
+func BlogArchive(posts []Post, tag string) Archive {
+	allTags := tagList(posts)
+
 	if tag == "" {
-		return posts
+		return Archive{
+			Posts: posts,
+			Tags:  allTags,
+		}
 	}
 
 	var filterPosts []Post
@@ -66,5 +93,8 @@ func Archive(posts []Post, tag string) []Post {
 		filterPosts = append(filterPosts, post)
 	}
 
-	return filterPosts
+	return Archive{
+		Posts: filterPosts,
+		Tags:  allTags,
+	}
 }

@@ -77,20 +77,20 @@ Test 2`
 	assertPost(t, posts[1], testPost2)
 }
 
-func TestArchive(t *testing.T) {
+func TestBlogArchive(t *testing.T) {
 	var tests = struct {
 		post []blogposts.Post
 		tag  string
-		want []blogposts.Post
+		want blogposts.Archive
 	}{
-		post: []blogposts.Post{testPost1, testPost2},
+		post: []blogposts.Post{testPost1},
 		tag:  "tdd",
-		want: []blogposts.Post{testPost1},
+		want: blogposts.Archive{[]blogposts.Post{testPost1}, []string{"go", "tdd"}},
 	}
 
 	testname := fmt.Sprintf("%+v, %s, %+v", tests.post, tests.tag, tests.want)
 	t.Run(testname, func(t *testing.T) {
-		got := blogposts.Archive(tests.post, tests.tag)
+		got := blogposts.BlogArchive(tests.post, tests.tag)
 		if !reflect.DeepEqual(got, tests.want) {
 			t.Errorf("got %+v, want %+v", got, tests.want)
 		}

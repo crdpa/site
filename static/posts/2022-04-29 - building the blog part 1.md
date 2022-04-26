@@ -3,7 +3,7 @@ Description: A technical approach on building this blog using Go.
 Date: 2022-04-29
 Tags: go, website
 ---
-# Criando o site do zero - parte 1
+# Building this blog from scratch - part 1
 
 Resolvi refazer meu site como um projeto de aprendizado, portanto decidi que faria do zero. Decidi que faria o backend em Go, que é a linguagem que estou aprendendo e que tenho mais afinidade no momento, e aproveitei para aprender mais sobre html e css.
 

@@ -9,16 +9,14 @@
     <h1>Blog</h1>
     <div class='content' id='top'>
       <div class='tags'>
-        {{range .}}
         <p>Tags:
-        {{range $key, $value := .Tags}}
-          <a href='/blog?tag={{$key}}'>{{$key}}</a>
+        {{range .Tags}}
+          <a href='/blog?tag={{.}}'>{{.}}</a>
         {{end}}
         </p>
-        {{end}}
       </div>
       <div class='archive'>
-      {{range .}}
+      {{range .Posts}}
         {{if ne .Title ""}}
           <div class='archive-item'>
             <p id='archivedate'>{{.Date.Format "Jan 02, 2006"}} - </p>

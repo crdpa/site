@@ -21,7 +21,7 @@ func httpFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	case "/blog":
 		tag = r.URL.Query().Get("tag")
-		executeTemplate(w, "blog.html", blogposts.Archive(posts, tag))
+		executeTemplate(w, "blog.html", blogposts.BlogArchive(posts, tag))
 		return
 	}
 }
