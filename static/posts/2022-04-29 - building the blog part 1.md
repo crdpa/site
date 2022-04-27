@@ -68,7 +68,7 @@ type Post struct {
     Description string
     Date        time.Time
     Tags        []string
-    Body        string
+    Body        template.HTML
 }
 ```
 
@@ -101,7 +101,7 @@ const (
 func newPost(postFile io.Reader) (Post, error) {
 	scanner := bufio.NewScanner(postFile)
 
-	// Função anônima para ler o conteúdo do arquivo removendo os separadores
+	// Função para ler o conteúdo do arquivo removendo os separadores
 	readLines := func(tag string) string {
 		scanner.Scan()
 		return strings.TrimPrefix(scanner.Text(), tag)
@@ -112,7 +112,7 @@ func newPost(postFile io.Reader) (Post, error) {
 	desc := readLines(descSeparator)
 	date := readLines(dateSeparator)
 	tags := strings.Split(readLines(tagsSeparator), ", ")
-	body := strings.TrimSuffix(readBody(scanner), "\n")
+	body := template.HTML(readBody(scanner))
 
 	// Aqui analiso a data declarando o formato em que ela foi digitada
 	// e convertendo para time.Time
@@ -139,11 +139,11 @@ func readBody(scanner *bufio.Scanner) string {
 		fmt.Fprintln(&buf, scanner.Text())
 	}
 
-	newBuf := buf.String()
+	newBuf := buf.Bytes()
 	// blackfriday converte markdown para html
 	// https://github.com/russross/blackfriday/tree/v2
-	content := blackfriday.Run([]byte(newBuf))
-	return string(content)
+	content := bytes.TrimSpace(blackfriday.Run(newBuf))
+	return content
 }
 ```
 

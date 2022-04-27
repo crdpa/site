@@ -14,7 +14,6 @@ body {
   background: #242423;
   color: #E8EDDF;
   line-height: 1.4;
-  font-size: 12pt;
 }
 
 h1 {
@@ -77,7 +76,7 @@ pre {
 
 code {
   font-family: 'IBM Plex Mono', Monaco, monospace;
-  font-size: 0.95em;
+  font-size: 1em;
 }
 
 .page {
@@ -101,7 +100,7 @@ code {
   height: 150px;
 }
 
-@media only screen and (min-width: 401px) and (max-width: 960px) {
+@media only screen and (min-width: 401px) and (max-width: 900px) {
   .header {
     display: flex;
     flex-flow: column nowrap;
@@ -124,7 +123,6 @@ code {
 
 .links {
   padding: 10px 20px;
-  font-size: 16px;
 }
 
 .bottom-links {
@@ -140,18 +138,18 @@ code {
 }
 
 .blog-grid-item {
-  margin: 10px 2px 10px 2px;
+  margin: 4px 2px 4px 2px;
   background: #333533;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   border-radius: 5px;
-  padding: 10px;
+  padding: 8px;
 }
 
 .blog-grid-item h1 {
   margin-top: 1px;
   margin-bottom: 2px;
   margin-left: 0px;
-  font-size: 14pt;
+  font-size: 1.2em;
   color: #9395D3;
 }
 
@@ -171,7 +169,6 @@ code {
 
 .show-posts {
   text-align: right;
-  font-size: 12pt;
   padding: 0 10px 0 10px;
 }
 
@@ -202,19 +199,19 @@ code {
 
 #archivedate {
   font-style: oblique;
-  font-size: 14pt;
+  font-size: 1em;
   color: #648381;
 }
 
 #archivetitle {
   font-weight: bold;
-  font-size: 14pt;
-  color: #9395D3;
+  font-size: 1em;
+  color: #E8EDDF;
 }
 
 #archivetags {
   font-style: italic;
-  font-size: 12pt;
+  font-size: 0.8em;
   color: #9F84BD;
 }
 
@@ -223,7 +220,7 @@ code {
   margin-bottom: 4px;
   margin-left: 0px;
   color: #1B998B;
-  font-size: 18pt;
+  font-size: 1.6em;
 }
 
 .post h2 {
@@ -231,7 +228,7 @@ code {
   margin-bottom: 4px;
   margin-left: 0px;
   color: #7D5BA6;
-  font-size: 16pt;
+  font-size: 1.4em;
 }
 
 .post p {

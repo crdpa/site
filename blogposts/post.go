@@ -53,7 +53,7 @@ func newPost(postFile io.Reader) (Post, error) {
 
 	tags := make(map[string]struct{})
 	for _, tag := range tagSlice {
-		tags[fmt.Sprintf(tag)] = struct{}{}
+		tags[tag] = struct{}{}
 	}
 
 	return Post{
