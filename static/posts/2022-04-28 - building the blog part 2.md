@@ -1,7 +1,7 @@
-Title: Building this blog from scratch - part 2
+Title: Building this site from scratch - part 2
 Description: Final steps and adjustments of my website.
-Date: 2022-05-02
-Tags: go, website
+Date: 2022-04-28
+Tags: go
 ---
 # Building this blog from scratch - part 2
 
