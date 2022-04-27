@@ -39,7 +39,7 @@ func UrlCreator(title string) string {
 
 	url := reg.ReplaceAllString(title, "")
 	// if the title has "-" with spaces around, it will become "---"
-	// let's fix that
+	// it's ugly, so let's fix that
 	url = strings.Replace(url, "---", "-", -1)
 	return "/blog/" + url
 }
@@ -47,11 +47,35 @@ func UrlCreator(title string) string {
 
 You can check the resulting URL in your address bar right now.
 
+Now we need to implement the routes with the posts URLs. Let's make a new function and range over []Post:
+
+```go
+//main.go
+func makePostHandler(post blogposts.Post) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		executeTemplate(w, "post.html", post)
+	}
+}
+
+func main() {
+//...
+	http.HandleFunc("/", httpFunc)
+	http.HandleFunc("/blog", httpFunc)
+
+	// range over the slice of Post
+	for _, post := range posts {
+		http.HandleFunc(post.Url, makePostHandler(post))
+	}
+
+```
+
+All done!
+
 ## Tags
 
 I wanted tags for my blog posts so the users could filter posts by subject. Not that this site will have a lot of posts, but why not? One more thing to learn.
 
-First things first: why map[string]struct{}?
+First things first: why map[string]struct{} for tags?
 
 The internal design of maps in Go is highly optimized for performance and memory management. An empty struct (struct{}) has no fields and cannot hold any pointers so it does not require memory to represent it. If your map will have thousands of entries it will need less memory. It is not my case, but this is a simple optimization and there is no reason to not use it.
 
@@ -76,7 +100,7 @@ func newPost(postFile io.Reader) (Post, error) {
 
 ## Archive
 
-For the blog page, i needed two informations. The list of posts and the list of all tags available for filtering.
+For the blog archive page, i needed two values. The list of posts and the list of all tags available for filtering.
 
 The problem is that the executeTemplate function can only receive a single value. I would have to choose between the slice of posts or the slice of tags, but there is a way around this.
 
@@ -97,6 +121,7 @@ And here is the tagList and BlogArchive function that will generate the content 
 ```go
 // post.go
 
+// create a slice containing all tags
 func tagList(posts []Post) []string {
 	tagsMap := make(map[string]struct{})
 	// range over posts adding the tags to a map
@@ -118,9 +143,9 @@ func tagList(posts []Post) []string {
 	return tagsSlice
 }
 
-// it returns the Archive struct
+// the function returns the new Archive struct
 func BlogArchive(posts []Post, tag string) Archive {
-	// sorted tags
+	// function to return a slice with the sorted tags
 	allTags := tagList(posts)
 
 	// if the user didn't select a tag for filtering, return all posts
@@ -148,3 +173,32 @@ func BlogArchive(posts []Post, tag string) Archive {
 	}
 }
 ```
+
+And that's all there is to it. Now we just have to adjust the HTML templates which is pretty straightforward.
+
+Here is what we need to show all tags in the blog archive page:
+
+```html
+<h1>Blog</h1>
+<div class='tags'>
+  <p>Tags:
+  // range over the Tags field of the Archive struct
+  {{range .Tags}}
+    <a href='/blog?tag={{.}}'>{{.}}</a>
+  {{end}}
+  </p>
+</div>
+<div class='archive'>
+  // range over the Pags field of the Archive struct
+  {{range .Posts}}
+    {{if ne .Title ""}}
+      <div class='archive-item'>
+        <p>{{.Date.Format "Jan 02, 2006"}} -
+        <a href='{{.Url}}'>{{.Title}}</a></p>
+        {{range $key, $value := .Tags}}<a href='/blog?tag={{$key}}'><p>{{$key}}</p></a>&nbsp{{end}}
+      </div>
+    {{end}}
+  {{end}}
+</div>
+```
+

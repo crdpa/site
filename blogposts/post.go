@@ -11,7 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/russross/blackfriday/v2"
+	"github.com/Depado/bfchroma"
+	bf "github.com/russross/blackfriday/v2"
 )
 
 type Post struct {
@@ -74,7 +75,9 @@ func readBody(scanner *bufio.Scanner) []byte {
 	}
 
 	newBuf := buf.Bytes()
-	content := bytes.TrimSpace(blackfriday.Run(newBuf))
+	content := bytes.TrimSpace(bf.Run(newBuf, bf.WithRenderer(bfchroma.NewRenderer(
+		bfchroma.Style("monokai"),
+	))))
 	return content
 }
 

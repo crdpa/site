@@ -60,7 +60,7 @@ func main() {
 		http.HandleFunc(post.Url, makePostHandler(post))
 	}
 
-	//port := ":8000"
+	//port := "8000"
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatal("$PORT must be set")
