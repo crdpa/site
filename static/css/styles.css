@@ -100,23 +100,6 @@ code {
   height: 150px;
 }
 
-@media only screen and (min-width: 401px) and (max-width: 900px) {
-  .header {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    height: auto;
-    width: 100%;
-  }
-
-  .avatar img {
-    display: block;
-    margin: auto;
-    width: auto;
-    height: 150px;
-  }
-}
-
 .about p {
   padding: 6px;
 }
@@ -234,4 +217,31 @@ code {
 .post p {
   margin-top: 4px;
   margin-bottom: 4px;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 800px) {
+  body {
+    max-width: 100%;
+  }
+
+  .header {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    height: auto;
+    width: 100%;
+  }
+
+  .avatar img {
+    display: none;
+    margin: auto;
+    width: auto;
+    height: 150px;
+  }
+
+  .blog-grid-item {
+    border-radius: 5px;
+    padding: 4px;
+  }
+
 }
