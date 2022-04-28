@@ -3,37 +3,35 @@
   <head>
     <meta charset='UTF-8'/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crdpa.net - blog</title>
+    <title>crdpa.net - Blog</title>
     <link rel='stylesheet' href='css/styles.css'/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div class='blog-content'>
-      <div class='top-links' id='top'>
-        <p><a href="/">Home</a> | <a href="/blog">Blog</a> | <a href='#bottom'>Bottom</a></p>
-      </div>
-      <h1>Blog</h1>
-      <div class='tags'>
-        <p>Tags:
+    <div class='content'>
+      {{ template "topbar" . }}
+      <div class='archive'>
+        <h1>Blog</h1>
+        <p id='archivetags'>Tags:
         {{range .Tags}}
           <a href='/blog?tag={{.}}'>{{.}}</a>
         {{end}}
         </p>
-      </div>
-      <div class='archive'>
-      {{range .Posts}}
-        {{if ne .Title ""}}
-          <div class='archive-item'>
-            <p id='archivedate'>{{.Date.Format "Jan 02, 2006"}} - </p>
-            <p id='archivetitle'><a href='{{.Url}}'>{{.Title}}</a></p>
-            <p id='line-break'><br /></p>
-            {{range $key, $value := .Tags}}<a href='/blog?tag={{$key}}'><p id='archivetags'>{{$key}}</p></a>&nbsp{{end}}
-          </div>
+        {{range .Posts}}
+          {{if ne .Title ""}}
+            <div class='archive-item'>
+              <p id='postdate'>{{.Date.Format "Jan 02, 2006"}} - </p>
+              <p id='posttitle'><a href='{{.Url}}'>{{.Title}}</a></p>
+              <p id='tag-line-break'><br /></p>
+              {{range $key, $value := .Tags}}
+              <p id='posttags'><a href='/blog?tag={{$key}}'>{{$key}}</a>&nbsp</p>
+              {{end}}
+            </div>
+          {{end}}
         {{end}}
-      {{end}}
       </div>
-    </div>
-    <div class='bottom-links'>
-      <p><a href='/'>« Back</a> | <a href='#top'>Top</a></p>
     </div>
   </body>
 </html>

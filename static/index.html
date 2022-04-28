@@ -5,43 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>crdpa.net</title>
     <link rel='stylesheet' href='css/styles.css'/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans&display=swap" rel="stylesheet">
   </head>
   <body>
-	<div class='page'>
-		<div class='header'>
-		  <div class='avatar'>
-		    <img src='img/avatar.png' />
-		  </div>
-		  <div class='about'>
-		    <h1>About</h1>
-		    <p>Hi! I'm Cris.<br />
-		    I'm a backend developer who loves linux, low tech, diy, books, movies and metal music.<br />
-		    You can find me on <a href='https://github.com/crdpa'>Github</a>,
-			<a href='https://www.linkedin.com/in/cristhyano/'>LinkedIn</a>, 
-			<a href='https://www.goodreads.com/user/show/55958511-crdpa'>Goodreads</a>, 
-			<a href='https://letterboxd.com/crdpa/'>Letterboxd</a> and crisdpa @ tuta . io.
-		  </div>
-		</div>
-		<div class='blog-grid-container'>
-		<h1>Blog</h1>
-		  <div class='blog-grid'>
-		 	{{range .}}
-		 	  {{if ne .Title ""}}
-			    <div class='blog-grid-item'>
-			      <div class='blog-post-title'>
-			        <h1><a href='{{.Url}}'>{{.Title}}</a></h1><p id='date'>{{.Date.Format "Jan 02, 2006"}}</p>
-		          </div>
-			      {{.Description}}
-			    </div>
-			  {{end}}
-			{{end}}
-		  </div>
-		</div>
-		<div class='show-posts'><p><a href="/blog">All posts »</a></p>
-		<div class='footer'>
-		  <p>Copyright by <a href='https://crdpa.net'>crdpa</a></p>
-		  <p><a href='https://crdpa.net/pubkey.asc'>AC4F</a> A1ED 66A7 293C 0DFA DD11 5178 6924 9446 17E3</p>
-		</div>
-	</div>
+    <div class='content'>
+      {{ template "topbar" . }}
+      <div class='header'>
+        <div class='avatar'>
+          <img src='img/avatar.png' />
+        </div>
+        <div class='about'>
+          <h1>About</h1>
+          <p>Hi! I'm Cris.<br />
+          I'm a backend developer who loves linux, low tech, diy, books, movies and metal music.<br />
+          You can find me on <a href='https://github.com/crdpa'>Github</a>,
+          <a href='https://www.linkedin.com/in/cristhyano/'>LinkedIn</a>,
+          <a href='https://www.goodreads.com/user/show/55958511-crdpa'>Goodreads</a>,
+          <a href='https://letterboxd.com/crdpa/'>Letterboxd</a> and crisdpa @ tuta . io.
+        </div>
+      </div>
+      <div class='blog-grid-container'>
+      <h1>Blog</h1>
+        <div class='blog-grid'>
+       	{{range .}}
+          {{if ne .Title ""}}
+            <div class='blog-grid-item'>
+              <div class='blog-post-title'>
+                <a href='{{.Url}}'><h3>{{.Title}}</h3></a>
+                <p id='date'>{{.Date.Format "Jan 02, 2006"}}</p>
+              </div>
+              {{.Description}}
+            </div>
+          {{end}}
+        {{end}}
+        </div>
+      </div>
+      <div class='show-posts'><p><a href="/blog">All posts »</a></p>
+      {{ template "footer" . }}
+    </div>
   </body>
 </html>

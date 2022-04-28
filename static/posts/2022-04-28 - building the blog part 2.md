@@ -1,5 +1,5 @@
 Title: Building this site from scratch - part 2
-Description: Final steps and adjustments of my website.
+Description: Final steps and adjustments of the site.
 Date: 2022-04-28
 Tags: go
 ---
@@ -176,20 +176,20 @@ func BlogArchive(posts []Post, tag string) Archive {
 
 And that's all there is to it. Now we just have to adjust the HTML templates which is pretty straightforward.
 
-Here is what we need to show all tags in the blog archive page:
+Here is what we need to show everything in the blog archive page:
 
 ```html
 <h1>Blog</h1>
 <div class='tags'>
   <p>Tags:
-  // range over the Tags field of the Archive struct
+  <!-- range over the Tags field of the Archive struct -->
   {{range .Tags}}
     <a href='/blog?tag={{.}}'>{{.}}</a>
   {{end}}
   </p>
 </div>
 <div class='archive'>
-  // range over the Pags field of the Archive struct
+  <!-- range over the Posts field of the Archive struct -->
   {{range .Posts}}
     {{if ne .Title ""}}
       <div class='archive-item'>
@@ -202,3 +202,4 @@ Here is what we need to show all tags in the blog archive page:
 </div>
 ```
 
+And now our blog is done.

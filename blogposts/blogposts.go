@@ -57,7 +57,7 @@ func FrontPage(posts []Post) []Post {
 }
 
 func tagList(posts []Post) []string {
-	tagsMap := make(map[string]struct{}, len(posts))
+	tagsMap := make(map[string]struct{})
 	for _, post := range posts {
 		for key := range post.Tags {
 			tagsMap[key] = struct{}{}

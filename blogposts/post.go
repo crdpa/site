@@ -76,7 +76,7 @@ func readBody(scanner *bufio.Scanner) []byte {
 
 	newBuf := buf.Bytes()
 	content := bytes.TrimSpace(bf.Run(newBuf, bf.WithRenderer(bfchroma.NewRenderer(
-		bfchroma.Style("monokai"),
+		bfchroma.Style("dracula"),
 	))))
 	return content
 }

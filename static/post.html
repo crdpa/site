@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>crdpa.net - {{.Title}}</title>
     <link rel='stylesheet' href='../css/styles.css'/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div class='top-links' id='top'>
-    <p><a href="/">Home</a> | <a href="/blog">Blog</a> | <a href='#bottom'>Bottom</a></p>
-    </div>
-    <div class='post'>
-    {{.Body}}
-    </div>
-    <div class='bottom-links' id='bottom'>
-    <p><a href="/">Home</a> | <a href="/blog">Blog</a> | <a href='#top'>Top</a></p>
+    <div class='content'>
+      {{ template "topbar" . }}
+      <div class='post'>
+        {{.Body}}
+      </div>
+      <div class='bottom-links' id='bottom'>
+        <p><a href='#top'>Top</a></p>
+      </div>
+      {{ template "footer" . }}
     </div>
   </body>
 </html>
