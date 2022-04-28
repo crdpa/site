@@ -24,6 +24,9 @@ func httpFunc(w http.ResponseWriter, r *http.Request) {
 		tag = r.URL.Query().Get("tag")
 		executeTemplate(w, "blog.html", blogposts.BlogArchive(posts, tag))
 		return
+	default:
+		http.NotFound(w, r)
+		return
 	}
 }
 

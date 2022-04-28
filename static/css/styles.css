@@ -36,6 +36,12 @@ body {
   max-width: 800px;
   padding: 10px 4px;
   line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+p {
+  margin-bottom: .8em;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -82,17 +88,18 @@ a:hover {
   text-decoration: underline;
 }
 
-pre {
+code,
+pre,
+samp {
+  font-family: 'IBM Plex Mono', 'Liberation Mono', Monaco, Consolas, monospace;
+  font-size: .9em;
   white-space: pre-wrap;
   word-wrap: normal;
   margin: 2px;
   padding: 0.5em;
   overflow-x: hidden;
+  border-radius: 5px;
   heigth: auto;
-}
-
-code {
-  font-family: 'IBM Plex Mono', 'Liberation Mono', Monaco, Consolas, monospace;
 }
 
 .content {
@@ -175,12 +182,15 @@ code {
 }
 
 .archive-item {
-  margin-top: 1px;
-  margin-bottom: 2px;
-  margin-left: 0px;
+  border-width: 2px;
+  border-color: var(--bg5);
+  border-style: none;
+  border-bottom-style: dashed;
 }
 
 .archive-item p {
+  margin-top: 2px;
+  margin-bottom: 2px;
   display: inline-block;
   vertical-align: top;
 }
@@ -200,7 +210,7 @@ code {
 }
 
 #posttags a {
-  color: var(--light_blue);
+  color: var(--bg4);
   font-style: italic;
   font-size: 0.9em;
   vertical-align: top;

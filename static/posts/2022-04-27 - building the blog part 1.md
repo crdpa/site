@@ -1,5 +1,5 @@
 Title: Building this site from scratch - part 1
-Description: How i build this blog from scratch using Go.
+Description: Building this blog from scratch using Go.
 Date: 2022-04-27
 Tags: go
 ---

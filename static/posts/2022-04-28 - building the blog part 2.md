@@ -1,5 +1,5 @@
 Title: Building this site from scratch - part 2
-Description: Final steps and adjustments of the site.
+Description: Final steps and adjustments for the site.
 Date: 2022-04-28
 Tags: go
 ---
