@@ -66,7 +66,7 @@ func main() {
 
 	port := "8000"
 	if *deploy == true {
-		port := os.Getenv("PORT")
+		port = os.Getenv("PORT")
 		if port == "" {
 			log.Fatal("$PORT must be set")
 		}
