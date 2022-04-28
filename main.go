@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"html/template"
 	"log"
 	"net/http"
@@ -41,6 +42,9 @@ func makePostHandler(post blogposts.Post) http.HandlerFunc {
 }
 
 func main() {
+	deploy := flag.Bool("deploy", false, "get environment PORT")
+	flag.Parse()
+
 	fsys := os.DirFS("./static/posts/")
 	var err error
 	posts, err = blogposts.NewPostsFromFS(fsys)
@@ -60,12 +64,14 @@ func main() {
 		http.HandleFunc(post.Url, makePostHandler(post))
 	}
 
-	//port := "8000"
-	port := os.Getenv("PORT")
-	if port == "" {
-		log.Fatal("$PORT must be set")
+	port := "8000"
+	if *deploy == true {
+		port := os.Getenv("PORT")
+		if port == "" {
+			log.Fatal("$PORT must be set")
+		}
 	}
 
-	log.Println("Server is running on port" + port)
+	log.Println("Server is running on port " + port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
