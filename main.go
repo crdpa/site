@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/crdpa/site/blogposts"
 )
@@ -45,7 +46,7 @@ func makePostHandler(post blogposts.Post) http.HandlerFunc {
 }
 
 func main() {
-	deploy := flag.Bool("deploy", false, "get environment PORT")
+	deploy := flag.Bool("deploy", false, "get environment $PORT")
 	flag.Parse()
 
 	fsys := os.DirFS("./static/posts/")
@@ -59,6 +60,8 @@ func main() {
 	http.Handle("/css/", http.StripPrefix("/css/", stylesheets))
 	images := http.FileServer(http.Dir("./static/img/"))
 	http.Handle("/img/", http.StripPrefix("/img/", images))
+	files := http.FileServer(http.Dir("./static/files/"))
+	http.Handle("/files/", http.StripPrefix("/files/", files))
 
 	http.HandleFunc("/", httpFunc)
 	http.HandleFunc("/blog", httpFunc)
@@ -75,6 +78,12 @@ func main() {
 		}
 	}
 
+	srv := &http.Server{
+		Addr:         ":" + port,
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
+	}
+
 	log.Println("Server is running on port " + port)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	log.Fatal(srv.ListenAndServe())
 }

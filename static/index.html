@@ -34,9 +34,11 @@
             <div class='blog-grid-item'>
               <div class='blog-post-title'>
                 <a href='{{.Url}}'><h3>{{.Title}}</h3></a>
-                <p id='date'>{{.Date.Format "Jan 02, 2006"}}</p>
+                <p>{{.Description}}</p>
               </div>
-              {{.Description}}
+              <div class='date'>
+                <p>{{.Date.Format "Jan 02, 2006"}}</p>
+              </div>
             </div>
           {{end}}
         {{end}}

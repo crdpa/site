@@ -131,6 +131,10 @@ samp {
   border-bottom-style: dashed;
 }
 
+.top-links p {
+  margin-bottom: 4px;
+}
+
 .bottom-links {
   text-align: right;
 }
@@ -145,23 +149,26 @@ samp {
 }
 
 .blog-grid-item {
+  display: flex;
   border-width: 3px;
   border-color: var(--bg5);
   border-style: none;
   border-bottom-style: dashed;
-  padding: 0px 0px 6px 0px;
+  padding: 0px 0px 0px 0px;
 }
 
 .blog-post-title {
-  display: flex;
+  flex: 0 0 85%;
   align-items: center;
 
   /* Remove the next line if you want the span to appear next to the h1 */
   justify-content: space-between;
-  padding: 0px 0px 0px 0px;
 }
 
-#date {
+.date {
+  flex: 1;
+  text-align: right;
+  align-self: center;
   font-style: italic;
   color: var(--grey);
 }
@@ -175,6 +182,10 @@ samp {
   margin-top: 10px;
   text-align: center;
   font-size: 0.9em;
+}
+
+.footer p {
+  margin-bottom: 0px;
 }
 
 .archive {
@@ -238,31 +249,7 @@ samp {
     display: none;
   }
 
-  h1 {
-    font-size: 1.5em;
-  }
-
-  h2 {
-    font-size: 1.4em;
-  }
-
-  h3 {
-    font-size: 1.3em;
-  }
-
-  h4 {
-    font-size: 1.25em;
-  }
-
-  h5 {
-    font-size: 1.2em;
-  }
-
-  h6 {
-    font-size: 1.15em;
-  }
-
-  #date {
+  .date {
     display: none;
   }
 
