@@ -56,18 +56,19 @@ func main() {
 		log.Fatal(err)
 	}
 
+	mux := http.NewServeMux()
 	stylesheets := http.FileServer(http.Dir("./static/css/"))
-	http.Handle("/css/", http.StripPrefix("/css/", stylesheets))
+	mux.Handle("/css/", http.StripPrefix("/css/", stylesheets))
 	images := http.FileServer(http.Dir("./static/img/"))
-	http.Handle("/img/", http.StripPrefix("/img/", images))
+	mux.Handle("/img/", http.StripPrefix("/img/", images))
 	files := http.FileServer(http.Dir("./static/files/"))
-	http.Handle("/files/", http.StripPrefix("/files/", files))
+	mux.Handle("/files/", http.StripPrefix("/files/", files))
 
-	http.HandleFunc("/", httpFunc)
-	http.HandleFunc("/blog", httpFunc)
+	mux.HandleFunc("/", httpFunc)
+	mux.HandleFunc("/blog", httpFunc)
 
 	for _, post := range posts {
-		http.HandleFunc(post.Url, makePostHandler(post))
+		mux.HandleFunc(post.Url, makePostHandler(post))
 	}
 
 	port := "8000"
@@ -80,6 +81,7 @@ func main() {
 
 	srv := &http.Server{
 		Addr:         ":" + port,
+		Handler:      mux,
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 	}
