@@ -32,7 +32,7 @@ func httpFunc(w http.ResponseWriter, r *http.Request) {
 }
 
 func executeTemplate(w http.ResponseWriter, templ string, content interface{}) {
-	templates := template.Must(template.ParseGlob("./static/*.html"))
+	templates := template.Must(template.ParseGlob("./ui/html/*.html"))
 	err := templates.ExecuteTemplate(w, templ, content)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -49,7 +49,7 @@ func main() {
 	deploy := flag.Bool("deploy", false, "get environment $PORT")
 	flag.Parse()
 
-	fsys := os.DirFS("./static/posts/")
+	fsys := os.DirFS("./posts/")
 	var err error
 	posts, err = blogposts.NewPostsFromFS(fsys)
 	if err != nil {
@@ -57,12 +57,8 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-	stylesheets := http.FileServer(http.Dir("./static/css/"))
-	mux.Handle("/css/", http.StripPrefix("/css/", stylesheets))
-	images := http.FileServer(http.Dir("./static/img/"))
-	mux.Handle("/img/", http.StripPrefix("/img/", images))
-	files := http.FileServer(http.Dir("./static/files/"))
-	mux.Handle("/files/", http.StripPrefix("/files/", files))
+	fileServer := http.FileServer(http.Dir("./ui/static/"))
+	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
 
 	mux.HandleFunc("/", httpFunc)
 	mux.HandleFunc("/blog", httpFunc)
