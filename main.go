@@ -11,19 +11,19 @@ import (
 	"github.com/crdpa/site/blogposts"
 )
 
-var (
+type blog struct {
 	posts []blogposts.Post
 	tag   string
-)
+}
 
-func httpFunc(w http.ResponseWriter, r *http.Request) {
+func (bl *blog) httpFunc(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/", "/index.html":
-		executeTemplate(w, "index.html", blogposts.FrontPage(posts))
+		executeTemplate(w, "index.html", blogposts.FrontPage(bl.posts))
 		return
 	case "/blog":
-		tag = r.URL.Query().Get("tag")
-		executeTemplate(w, "blog.html", blogposts.BlogArchive(posts, tag))
+		bl.tag = r.URL.Query().Get("tag")
+		executeTemplate(w, "blog.html", blogposts.BlogArchive(bl.posts, bl.tag))
 		return
 	default:
 		http.NotFound(w, r)
@@ -46,12 +46,21 @@ func makePostHandler(post blogposts.Post) http.HandlerFunc {
 }
 
 func main() {
+	var (
+		posts []blogposts.Post
+		tag   string
+	)
 	deploy := flag.Bool("deploy", false, "get environment $PORT")
 	flag.Parse()
 
+	bl := &blog{
+		posts: posts,
+		tag:   tag,
+	}
+
 	fsys := os.DirFS("./posts/")
 	var err error
-	posts, err = blogposts.NewPostsFromFS(fsys)
+	bl.posts, err = blogposts.NewPostsFromFS(fsys)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -60,10 +69,10 @@ func main() {
 	fileServer := http.FileServer(http.Dir("./ui/static/"))
 	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
 
-	mux.HandleFunc("/", httpFunc)
-	mux.HandleFunc("/blog", httpFunc)
+	mux.HandleFunc("/", bl.httpFunc)
+	mux.HandleFunc("/blog", bl.httpFunc)
 
-	for _, post := range posts {
+	for _, post := range bl.posts {
 		mux.HandleFunc(post.Url, makePostHandler(post))
 	}
 
