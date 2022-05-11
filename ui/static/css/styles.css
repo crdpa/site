@@ -168,6 +168,11 @@ samp {
   padding: 0px 0px 0px 0px;
 }
 
+.blog-grid-item p {
+  margin-top: 0px;
+  margin-bottom: 4px;
+}
+
 .blog-post-title {
   flex: 0 0 85%;
   align-items: center;
