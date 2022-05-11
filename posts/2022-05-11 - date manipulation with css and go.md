@@ -5,7 +5,7 @@ Tags: go, css, tips
 ---
 # Date manipulation with CSS and Go
 
-There are various ways of formatting a time.Time value. The standard library gives you the ability to specify the pattern you want
+There are various ways of formatting a time.Time value. The standard library gives you the ability to specify the pattern you want.
 
 When you get the current time:
 
@@ -19,16 +19,14 @@ Here is the output:
 Output: 2022-05-11 23:00:00 +0000 UTC m=+0.000000001
 ```
 
-This is not very readable if you are building a website. Fortunately, there are plenty of methods for formatting date.
-
-You can do this:
+This is not very readable if you are building a website. Fortunately, you can do this:
 
 ```go
 fmt.Println(time.Now().Format("January 2, 2006"))
 ```
 
 ```
-Output: May 05, 2022
+Output: May 11, 2022
 ```
 
 Or this:
@@ -41,11 +39,11 @@ fmt.Println(time.Now().Format("2006-01-02"))
 Output: 2022-05-11
 ```
 
-Go uses the date "01/02 03:04:05PM '06 -0700" to format instead of the traditional YYYY-MM-DD HH:MM:SS". You can read more about the reason in the [documentation](https://pkg.go.dev/time#pkg-constants).
+Go uses the date "01/02 03:04:05PM '06 -0700" to format instead of the traditional "YYYY-MM-DD HH:MM:SS whatever". You can read more about the reason in the [documentation](https://pkg.go.dev/time#pkg-constants).
 
 What is really cool is that you can format the date right in the html code of your website. By doing this, you can use CSS rules to display date in different formats when the screen size changes.
 
-Maybe you want the full date when visiting the website in a big monitor and the YYYY-MM-DD format when using a small screen so you don't lose information.
+Maybe you want the full date when visiting the website in a big screen and the YYYY-MM-DD format when using a small screen so you don't lose information.
 
 Here is a simple way of doing this:
 
@@ -62,8 +60,7 @@ The {{.Date.Format "2006-01-02"}} is the Go syntax to format the "Date" value wh
 
 Now we can use CSS rules to hide one and display the other based on screen size.
 
-When the screen is big, we display the 'date-full' <div```
-and when the screen goes below a specified width, we invert the condition. Here it is:
+When the screen is big, we display the 'date-full' <div> and when the screen goes below a specified width, we reverse the condition. Here it is:
 
 ```css
 .date-full {
@@ -86,9 +83,9 @@ and when the screen goes below a specified width, we invert the condition. Here 
 }
 ```
 
-And voilá. You can write a mockup with hardcoded date to see how it works without having to write any Go code, but the concept is pretty simple.
+And voilá. You can write a mockup site with hardcoded dates to see how it works without having to write any Go code, but the concept is pretty simple.
 
-I use something similar in this website, but i decided to simply hide the date when the screen is small.
+I use something similar on this website, but decided to hide the date when the screen is small.
 
 Visit the [front page](https://crdpa.net) and resize the browser window. You should see the date desappearing when the screen goes below 800px width (I did this for the picture in the About section too).
 
