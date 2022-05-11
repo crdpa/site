@@ -64,7 +64,6 @@ Now we can use CSS rules to hide one and display the other based on screen size.
 
 When the screen is big, we display the 'date-full' <div```
 and when the screen goes below a specified width, we invert the condition. Here it is:
-```
 
 ```css
 .date-full {
