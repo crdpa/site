@@ -147,6 +147,9 @@ samp {
 }
 
 .bottom-links {
+  border-width: 3px;
+  border-color: var(--bg5);
+  border-top-style: dashed;
   text-align: right;
 }
 
@@ -198,10 +201,6 @@ samp {
   margin-top: 10px;
   text-align: center;
   font-size: 0.9em;
-}
-
-.footer p {
-  margin-bottom: 0px;
 }
 
 .archive {
