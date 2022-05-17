@@ -60,7 +60,7 @@ func newPost(postFile io.Reader) (Post, error) {
 		tags[tag] = struct{}{}
 	}
 
-	time := math.Round(float64(wordCount) / 200.0)
+	time := math.Ceil(float64(wordCount) / 200.0)
 
 	return Post{
 		Title:       title,
