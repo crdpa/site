@@ -22,7 +22,7 @@
         {{range .Posts}}
           {{if ne .Title ""}}
             <div class='archive-item'>
-              <p id='postdate'>{{.Date.Format "Jan 02, 2006"}} - </p>
+              <p id='postdate'>{{.Date.Format "2006 01 02"}} - </p>
               <p id='posttitle'><a href='{{.Url}}'>{{.Title}}</a></p>
               <p id='tag-line-break'><br /></p>
               {{range $key, $value := .Tags}}
