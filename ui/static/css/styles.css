@@ -247,7 +247,9 @@ samp {
   display: none;
 }
 
-#info {
+#post-info {
+  margin-top: 0px;
+  font-style: italic;
   color: var(--grey);
 }
 

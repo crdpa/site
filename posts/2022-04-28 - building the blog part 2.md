@@ -3,8 +3,6 @@ Description: Final steps and adjustments for the site.
 Date: 2022-04-28
 Tags: go
 ---
-# Building this blog from scratch - part 2
-
 Continuing from the last post, now I'll show some things I wanted to implement and the problems that appeared with it.
 
 ## URLs

@@ -3,8 +3,6 @@ Description: How to display date formats in your website based on screen size
 Date: 2022-05-11
 Tags: go, css, tips
 ---
-# Date manipulation with CSS and Go
-
 There are various ways of formatting a time.Time value. The standard library gives you the ability to specify the pattern you want.
 
 When you get the current time:

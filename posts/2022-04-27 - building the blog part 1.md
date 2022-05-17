@@ -3,8 +3,6 @@ Description: Building this blog from scratch using Go.
 Date: 2022-04-27
 Tags: go
 ---
-# Building this blog from scratch - part 1
-
 In my quest to become a developer, I decided to rewrite my website from scratch. The previous version was just a static page hosted on Github Pages. I had a [bash script](https://github.com/crdpa/bsg) that converted markdown files using [Pandoc](https://pandoc.org/) and generated the website for me, including an index of posts ordered by the filenames. It was hacky, but did the job.
 
 It is time to take things to the next level and since I'm learning Go, which is perfect for web related stuff, I decided to write the site from the ground up.
