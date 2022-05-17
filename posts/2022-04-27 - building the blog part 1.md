@@ -68,7 +68,7 @@ Done! Just run the app and type *localhost:8000* in Firefox.
 
 ## Blog posts
 
-The blogposts will be markdown files that i will convert to HTML. I found this neat markdown processor called [Blackfriday](https://github.com/russross/blackfriday/tree/v2) and decided to give it a go.
+The blog posts will be markdown files that i will convert to HTML. I found this neat markdown processor called [Blackfriday](https://github.com/russross/blackfriday/tree/v2) and decided to give it a go.
 
 The post structure is like this:
 

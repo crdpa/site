@@ -13,6 +13,8 @@
     <div class='content'>
       {{ template "topbar" . }}
       <div class='post'>
+        {{$time := .ReadingTime}}
+        <p id='info'>{{.Date.Format "January 02, 2006"}} · {{if eq $time 0}} &lt; 1 minute {{else if eq $time 1}} 1 minute {{else}} {{$time}} minutes {{end}}read</p>
         <artitle>
         {{.Body}}
         </article>

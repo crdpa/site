@@ -46,6 +46,7 @@ func main() {
 
 	srv := &http.Server{
 		Addr:         ":" + port,
+		IdleTimeout:  time.Minute,
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		Handler:      bl.routes(),

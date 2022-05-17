@@ -247,6 +247,10 @@ samp {
   display: none;
 }
 
+#info {
+  color: var(--grey);
+}
+
 @media only screen and (min-width: 0px) and (max-width: 800px) {
   body {
     margin-left: 5px;

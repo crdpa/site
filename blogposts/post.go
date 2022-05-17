@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"io"
 	"log"
+	"math"
 	"regexp"
 	"strings"
 	"time"
@@ -21,6 +22,7 @@ type Post struct {
 	Date        time.Time
 	Tags        map[string]struct{}
 	Url         string
+	ReadingTime int
 	Body        template.HTML
 }
 
@@ -44,7 +46,8 @@ func newPost(postFile io.Reader) (Post, error) {
 	date := readLines(dateSeparator)
 	tagSlice := strings.Split(readLines(tagsSeparator), ", ")
 	url := UrlCreator(title)
-	body := template.HTML(readBody(scanner))
+	content, wordCount := readBody(scanner)
+	body := template.HTML(content)
 
 	const dateForm = "2006-01-02"
 	parsedDate, err := time.Parse(dateForm, date)
@@ -57,28 +60,34 @@ func newPost(postFile io.Reader) (Post, error) {
 		tags[tag] = struct{}{}
 	}
 
+	time := math.Round(float64(wordCount) / 200.0)
+
 	return Post{
 		Title:       title,
 		Description: desc,
 		Date:        parsedDate,
 		Tags:        tags,
 		Url:         url,
+		ReadingTime: int(time),
 		Body:        body,
 	}, nil
 }
 
-func readBody(scanner *bufio.Scanner) []byte {
+func readBody(scanner *bufio.Scanner) ([]byte, int) {
 	scanner.Scan()
 	buf := bytes.Buffer{}
 	for scanner.Scan() {
 		fmt.Fprintln(&buf, scanner.Text())
 	}
 
+	wordCount := len(strings.Fields(buf.String()))
+
 	newBuf := buf.Bytes()
 	content := bytes.TrimSpace(bf.Run(newBuf, bf.WithRenderer(bfchroma.NewRenderer(
 		bfchroma.Style("dracula"),
 	))))
-	return content
+
+	return content, wordCount
 }
 
 func UrlCreator(title string) string {

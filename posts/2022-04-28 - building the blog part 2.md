@@ -5,11 +5,11 @@ Tags: go
 ---
 # Building this blog from scratch - part 2
 
-Continuing from the last post, now I'll show some things I wanted to implement and the problems that arised with it.
+Continuing from the last post, now I'll show some things I wanted to implement and the problems that appeared with it.
 
 ## URLs
 
-To implement the url for the posts, I decided to add a new field in the post struct:
+To implement the URL for the posts, I decided to add a new field in the post struct:
 
 ```go
 // post.go
