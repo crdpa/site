@@ -12,26 +12,32 @@ import (
 
 var (
 	testPost1 = blogposts.Post{
-		Title:       "Post 1",
-		Description: "Description 1",
-		Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
-		Tags: map[string]struct{}{
-			"tdd": {},
-			"go":  {},
+		blogposts.Metadata{
+			Title:       "Post 1",
+			Description: "Description 1",
+			Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
+			Tags: map[string]struct{}{
+				"tdd": {},
+				"go":  {},
+			},
+			ReadingTime: 1,
+			Url:         "/blog/post-1",
 		},
-		Url:  "/blog/post-1",
-		Body: `<p>Test 1</p>`,
+		`<p>Test 1</p>`,
 	}
 	testPost2 = blogposts.Post{
-		Title:       "Post 2",
-		Description: "Description 2",
-		Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
-		Tags: map[string]struct{}{
-			"javascript": {},
-			"glue":       {},
+		blogposts.Metadata{
+			Title:       "Post 2",
+			Description: "Description 2",
+			Date:        time.Date(2006, 1, 2, 0, 0, 0, 0, time.UTC),
+			Tags: map[string]struct{}{
+				"javascript": {},
+				"glue":       {},
+			},
+			ReadingTime: 1,
+			Url:         "/blog/post-2",
 		},
-		Url:  "/blog/post-2",
-		Body: `<p>Test 2</p>`,
+		`<p>Test 2</p>`,
 	}
 )
 

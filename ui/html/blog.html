@@ -20,12 +20,12 @@
         {{end}}
         </p>
         {{range .Posts}}
-          {{if ne .Title ""}}
+          {{if ne .Metadata.Title ""}}
             <div class='archive-item'>
-              <p id='postdate'>{{.Date.Format "2006 01 02"}} - </p>
-              <p id='posttitle'><a href='{{.Url}}'>{{.Title}}</a></p>
+              <p id='postdate'>{{.Metadata.Date.Format "2006 01 02"}} - </p>
+              <p id='posttitle'><a href='{{.Metadata.Url}}'>{{.Metadata.Title}}</a></p>
               <p id='tag-line-break'><br /></p>
-              {{range $key, $value := .Tags}}
+              {{range $key, $value := .Metadata.Tags}}
               <p id='posttags'><a href='/blog?tag={{$key}}'>{{$key}}</a>&nbsp</p>
               {{end}}
             </div>

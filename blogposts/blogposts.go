@@ -28,7 +28,7 @@ func NewPostsFromFS(filesystem fs.FS) ([]Post, error) {
 
 	// sort slice of posts by date
 	sort.Slice(posts, func(i, j int) bool {
-		return posts[i].Date.After(posts[j].Date)
+		return posts[i].Metadata.Date.After(posts[j].Metadata.Date)
 	})
 
 	return posts, nil
@@ -59,7 +59,7 @@ func FrontPage(posts []Post) []Post {
 func tagList(posts []Post) []string {
 	tagsMap := make(map[string]struct{})
 	for _, post := range posts {
-		for key := range post.Tags {
+		for key := range post.Metadata.Tags {
 			tagsMap[key] = struct{}{}
 		}
 	}
@@ -85,7 +85,7 @@ func BlogArchive(posts []Post, tag string) Archive {
 
 	var filterPosts []Post
 	for _, post := range posts {
-		_, has := post.Tags[tag]
+		_, has := post.Metadata.Tags[tag]
 		if !has {
 			continue
 		}

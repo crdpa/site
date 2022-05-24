@@ -32,14 +32,14 @@
       <h1>Blog</h1>
         <div class='blog-grid'>
        	{{range .}}
-          {{if ne .Title ""}}
+          {{if ne .Metadata.Title ""}}
             <div class='blog-grid-item'>
               <div class='blog-post-title'>
-                <a href='{{.Url}}'><h3>{{.Title}}</h3></a>
-                <p>{{.Description}}</p>
+                <a href='{{.Metadata.Url}}'><h3>{{.Metadata.Title}}</h3></a>
+                <p>{{.Metadata.Description}}</p>
               </div>
               <div class='date'>
-                <p>{{.Date.Format "Jan 02, 2006"}}</p>
+                <p>{{.Metadata.Date.Format "Jan 02, 2006"}}</p>
               </div>
             </div>
           {{end}}

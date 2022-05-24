@@ -44,7 +44,7 @@ func (bl *blog) routes() http.Handler {
 	mux.HandleFunc("/blog", bl.httpFunc)
 
 	for _, post := range bl.posts {
-		mux.HandleFunc(post.Url, bl.makePostHandler(post))
+		mux.HandleFunc(post.Metadata.Url, bl.makePostHandler(post))
 	}
 
 	return secureHeaders(mux)

@@ -16,14 +16,18 @@ import (
 	bf "github.com/russross/blackfriday/v2"
 )
 
-type Post struct {
+type Metadata struct {
 	Title       string
 	Description string
 	Date        time.Time
 	Tags        map[string]struct{}
 	Url         string
 	ReadingTime int
-	Body        template.HTML
+}
+
+type Post struct {
+	Metadata Metadata
+	Body     template.HTML
 }
 
 const (
@@ -62,14 +66,18 @@ func newPost(postFile io.Reader) (Post, error) {
 
 	time := math.Ceil(float64(wordCount) / 200.0)
 
-	return Post{
+	metadata := Metadata{
 		Title:       title,
 		Description: desc,
 		Date:        parsedDate,
 		Tags:        tags,
 		Url:         url,
 		ReadingTime: int(time),
-		Body:        body,
+	}
+
+	return Post{
+		Metadata: metadata,
+		Body:     body,
 	}, nil
 }
 

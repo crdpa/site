@@ -3,7 +3,7 @@
   <head>
     <meta charset='UTF-8'/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crdpa.net - {{.Title}}</title>
+    <title>crdpa.net - {{.Metadata.Title}}</title>
     <link rel='stylesheet' href='../static/css/styles.css'/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,9 +13,9 @@
     <div class='content'>
       {{ template "topbar" . }}
       <div class='post'>
-        <h1>{{.Title}}</h1>
-        {{$time := .ReadingTime}}
-        <p id='post-info'>{{.Date.Format "January 02, 2006"}} · {{if eq $time 0}} &lt; 1 minute {{else if eq $time 1}} 1 minute {{else}} {{$time}} minutes {{end}}read</p>
+        <h1>{{.Metadata.Title}}</h1>
+        {{$time := .Metadata.ReadingTime}}
+        <p id='post-info'>{{.Metadata.Date.Format "January 02, 2006"}} · {{if eq $time 0}} &lt; 1 minute {{else if eq $time 1}} 1 minute {{else}} {{$time}} minutes {{end}}read</p>
         <artitle>
         {{.Body}}
         </article>
